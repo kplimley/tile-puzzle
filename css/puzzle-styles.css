@@ -1,0 +1,231 @@
+body {
+  height: 100%;
+  background-color: #F29700;
+  font-size: 20px;
+}
+h1 {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin: 1rem;
+}
+main > p {
+  margin-left: 1rem;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+#info-box {
+  position: absolute;
+  display: block;
+  /* height: 10em; */
+  width: 12em;
+  top: 1em;
+  left: 750px;
+  font-style: italic;
+  /* outline: 1px pink solid; */
+}
+#info-box p {
+  position: relative;
+  /* outline: 1px red solid; */
+}
+#info-box span {
+  font-weight: 600;
+}
+#msg {
+  font-size: 1.5rem;
+}
+#time-widget {
+  position: absolute;
+  display: block;
+  width: 12em;
+  bottom: 1em;
+  left: 750px;
+  font-style: italic;
+}
+#puzzle {
+  /*
+  border: 10px ridge navy; 
+  */ 
+  padding: 0;
+  
+  border-collapse: collapse;
+  margin: 3em;
+  outline-style: ridge;
+  outline-width: 2em;
+  outline-color: blue;
+}
+td {
+  padding: 0;
+  
+  background-origin: border-box;
+  background-repeat: no-repeat;
+}
+table.size-three td {
+  height: 200px;
+  width: 200px;
+}
+table.size-four td {
+  width: 150px;
+  height: 150px;
+  /* outline: 1px solid lightskyblue; */
+}
+
+/* Background images for 3x3 puzzle */
+.size-three .t1 {
+  background-color: olive;
+  background-image: url("../images/grass1.jpg");
+}
+.size-three .t2 {
+  background-color: blueviolet;
+  background-image: url("../images/grass2.jpg");
+}
+.size-three .t3 {
+  background-color: gold;
+  background-image: url("../images/grass3.jpg");
+}
+.size-three .t4 {
+  background-color: coral;
+  background-image: url("../images/grass4.jpg");
+}
+.size-three .t5 {
+  background-color: firebrick;
+  background-image: url("../images/grass5.jpg");
+}
+.size-three .t6 {
+  background-color: steelblue;
+  background-image: url("../images/grass6.jpg");
+}
+.size-three .t7 {
+  background-color: sienna;
+  background-image: url("../images/grass7.jpg");
+}
+.size-three .t8 {
+  background-color:forestgreen;
+  background-image: url("../images/grass8.jpg");
+}
+.size-three .blank {
+  opacity: 0.2;
+  background-image: url("../images/grass9.jpg");
+}
+.size-three .t9 {
+  background-image: url("../images/grass9.jpg");
+}
+
+/* Background images for 4x4 puzzle */
+.winterportrait .t1 {
+  background-image: url("../images/puzzle/winterportrait_1.jpg");
+}
+.winterportrait .t2 {
+  background-image: url("../images/puzzle/winterportrait_2.jpg");
+}
+.winterportrait .t3 {
+  background-image: url("../images/puzzle/winterportrait_3.jpg");
+}
+.winterportrait .t4 {
+  background-image: url("../images/puzzle/winterportrait_4.jpg");
+}
+.winterportrait .t5 {
+  background-image: url("../images/puzzle/winterportrait_5.jpg");
+}
+.winterportrait .t6 {
+  background-image: url("../images/puzzle/winterportrait_6.jpg");
+}
+.winterportrait .t7 {
+  background-image: url("../images/puzzle/winterportrait_7.jpg");
+}
+.winterportrait .t8 {
+  background-image: url("../images/puzzle/winterportrait_8.jpg");
+}
+.winterportrait .t9 { /* This class should only be used for the 4x4 table */
+  background-image: url("../images/puzzle/winterportrait_9.jpg");
+}
+.winterportrait .t10 {
+  background-image: url("../images/puzzle/winterportrait_10.jpg");
+}
+.winterportrait .t11 {
+  background-image: url("../images/puzzle/winterportrait_11.jpg");
+}
+.winterportrait .t12 {
+  background-image: url("../images/puzzle/winterportrait_12.jpg");
+}
+.winterportrait .t13 {
+  background-image: url("../images/puzzle/winterportrait_13.jpg");
+}
+.winterportrait .t14 {
+  background-image: url("../images/puzzle/winterportrait_14.jpg");
+}
+.winterportrait .t15 {
+  background-image: url("../images/puzzle/winterportrait_15.jpg");
+}
+.winterportrait .blank {
+  opacity: 0.2;
+  background-image: url("../images/puzzle/winterportrait_16.jpg");
+}
+.winterportrait .t16 {
+  background-image: url("../images/puzzle/winterportrait_16.jpg");
+}
+/* Background images for 4x4 Saku-chan puzzle */
+.saku-puzzle .t1 {
+  background-image: url("../images/puzzle/sakuchan_1.jpg");
+}
+.saku-puzzle .t2 {
+  background-image: url("../images/puzzle/sakuchan_2.jpg");
+}
+.saku-puzzle .t3 {
+  background-image: url("../images/puzzle/sakuchan_3.jpg");
+}
+.saku-puzzle .t4 {
+  background-image: url("../images/puzzle/sakuchan_4.jpg");
+}
+.saku-puzzle .t5 {
+  background-image: url("../images/puzzle/sakuchan_5.jpg");
+}
+.saku-puzzle .t6 {
+  background-image: url("../images/puzzle/sakuchan_6.jpg");
+}
+.saku-puzzle .t7 {
+  background-image: url("../images/puzzle/sakuchan_7.jpg");
+}
+.saku-puzzle .t8 {
+  background-image: url("../images/puzzle/sakuchan_8.jpg");
+}
+.saku-puzzle .t9 { /* This class should only be used for the 4x4 table */
+  background-image: url("../images/puzzle/sakuchan_9.jpg");
+}
+.saku-puzzle .t10 {
+  background-image: url("../images/puzzle/sakuchan_10.jpg");
+}
+.saku-puzzle .t11 {
+  background-image: url("../images/puzzle/sakuchan_11.jpg");
+}
+.saku-puzzle .t12 {
+  background-image: url("../images/puzzle/sakuchan_12.jpg");
+}
+.saku-puzzle .t13 {
+  background-image: url("../images/puzzle/sakuchan_13.jpg");
+}
+.saku-puzzle .t14 {
+  background-image: url("../images/puzzle/sakuchan_14.jpg");
+}
+.saku-puzzle .t15 {
+  background-image: url("../images/puzzle/sakuchan_15.jpg");
+}
+.saku-puzzle .blank {
+  opacity: 0.2;
+  background-image: url("../images/puzzle/sakuchan_16.jpg");
+}
+.saku-puzzle .t16 {
+  background-image: url("../images/puzzle/sakuchan_16.jpg");
+}
+.hidden {
+  opacity: 0;
+  left: -500px;
+}
+
+/*
+button {
+  padding: 1em;
+  background-color: chocolate;
+  color: blanchedalmond;
+}
+*/

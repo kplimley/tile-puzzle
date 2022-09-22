@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Scrambled Tile Puzzle</title>
+  <link rel="stylesheet" href="css/puzzle-styles.css">
+</head>
+<body>
+  <main>
+    <h1>Scrambled Tiles Puzzle</h1>
+    <div id="info-box">
+      <p>Puzzle version: 2.1</p>
+      <p>Scramble level: <span id="scramble-level"></span></p>
+      <p>うごかしたかいすう: <span id="moves"></span></p>
+      <p>ばしょがあっているかず: <span id="num-correct"></span></p><br>
+      <p id="msg"></p>
+      <p><br><button id="play-again" class="hidden">もういっかいやる</button></p>
+      <p><a href="puzzle2022_v2.1.html">3 x 3 puzzle</a></p>
+      <p><a href="puzzle2022-4x4.html">Casey puzzle</a></p>
+    </div>
+    <div id="difficulty">
+      <input type="radio" name="difficulty" value="easy" id="difficulty-easy" checked="checked">
+      <label for="difficulty-easy">Easy</label>
+      <input type="radio" name="difficulty" value="hard" id="difficulty-hard">
+      <label for="difficulty-hard">Hard</label>
+    </div>
+    <div class="saku-puzzle">
+    <table id="puzzle" class="size-four" width="600" height="600">
+      <tbody>
+        <tr>
+          <td id="s1" class="t1"></td>
+          <td id="s2" class="t2"></td>
+          <td id="s3" class="t3"></td>
+          <td id="s4" class="t4"></td>
+        </tr>
+        <tr>
+            <td id="s5" class="t5"></td>
+            <td id="s6" class="t6"></td>
+            <td id="s7" class="t7"></td>
+            <td id="s8" class="t8"></td>
+        </tr>
+        <tr>
+          <td id="s9" class="t9"></td>
+          <td id="s10" class="t10"></td>
+          <td id="s11" class="t11"></td>
+          <td id="s12" class="t12"></td>
+        </tr>
+        <tr>
+          <td id="s13" class="t13"></td>
+          <td id="s14" class="t14"></td>
+          <td id="s15" class="t15"></td>
+          <td id="s16" class="blank"></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div id="time-widget">
+      <p><button>じかんをひょうじする</button></p>
+      <p class="hidden">かかったじかん: <span id="time-elapsed"></span> びょう</p></div>
+  </main>
+  <script src="js/puzzle_v2.js"></script>
+</body>
+</html>
