@@ -164,58 +164,58 @@ table.size-four td {
 .winterportrait .t16 {
   background-image: url("../images/winterportrait_16.jpg");
 }
-/* Background images for 4x4 Saku-chan puzzle */
+/* Background images for 4x4 S-chan puzzle */
 .saku-puzzle .t1 {
-  background-image: url("../images/puzzle/sakuchan_1.jpg");
+  background-image: url("../images/schan_1.jpg");
 }
 .saku-puzzle .t2 {
-  background-image: url("../images/puzzle/sakuchan_2.jpg");
+  background-image: url("../images/schan_2.jpg");
 }
 .saku-puzzle .t3 {
-  background-image: url("../images/puzzle/sakuchan_3.jpg");
+  background-image: url("../images/schan_3.jpg");
 }
 .saku-puzzle .t4 {
-  background-image: url("../images/puzzle/sakuchan_4.jpg");
+  background-image: url("../images/schan_4.jpg");
 }
 .saku-puzzle .t5 {
-  background-image: url("../images/puzzle/sakuchan_5.jpg");
+  background-image: url("../images/schan_5.jpg");
 }
 .saku-puzzle .t6 {
-  background-image: url("../images/puzzle/sakuchan_6.jpg");
+  background-image: url("../images/schan_6.jpg");
 }
 .saku-puzzle .t7 {
-  background-image: url("../images/puzzle/sakuchan_7.jpg");
+  background-image: url("../images/schan_7.jpg");
 }
 .saku-puzzle .t8 {
-  background-image: url("../images/puzzle/sakuchan_8.jpg");
+  background-image: url("../images/schan_8.jpg");
 }
 .saku-puzzle .t9 { /* This class should only be used for the 4x4 table */
-  background-image: url("../images/puzzle/sakuchan_9.jpg");
+  background-image: url("../images/schan_9.jpg");
 }
 .saku-puzzle .t10 {
-  background-image: url("../images/puzzle/sakuchan_10.jpg");
+  background-image: url("../images/schan_10.jpg");
 }
 .saku-puzzle .t11 {
-  background-image: url("../images/puzzle/sakuchan_11.jpg");
+  background-image: url("../images/schan_11.jpg");
 }
 .saku-puzzle .t12 {
-  background-image: url("../images/puzzle/sakuchan_12.jpg");
+  background-image: url("../images/schan_12.jpg");
 }
 .saku-puzzle .t13 {
-  background-image: url("../images/puzzle/sakuchan_13.jpg");
+  background-image: url("../images/schan_13.jpg");
 }
 .saku-puzzle .t14 {
-  background-image: url("../images/puzzle/sakuchan_14.jpg");
+  background-image: url("../images/schan_14.jpg");
 }
 .saku-puzzle .t15 {
-  background-image: url("../images/puzzle/sakuchan_15.jpg");
+  background-image: url("../images/schan_15.jpg");
 }
 .saku-puzzle .blank {
   opacity: 0.2;
-  background-image: url("../images/puzzle/sakuchan_16.jpg");
+  background-image: url("../images/schan_16.jpg");
 }
 .saku-puzzle .t16 {
-  background-image: url("../images/puzzle/sakuchan_16.jpg");
+  background-image: url("../images/schan_16.jpg");
 }
 .hidden {
   opacity: 0;
