@@ -113,56 +113,56 @@ table.size-four td {
 
 /* Background images for 4x4 puzzle */
 .winterportrait .t1 {
-  background-image: url("../images/puzzle/winterportrait_1.jpg");
+  background-image: url("../images/winterportrait_1.jpg");
 }
 .winterportrait .t2 {
-  background-image: url("../images/puzzle/winterportrait_2.jpg");
+  background-image: url("../images/winterportrait_2.jpg");
 }
 .winterportrait .t3 {
-  background-image: url("../images/puzzle/winterportrait_3.jpg");
+  background-image: url("../images/winterportrait_3.jpg");
 }
 .winterportrait .t4 {
-  background-image: url("../images/puzzle/winterportrait_4.jpg");
+  background-image: url("../images/winterportrait_4.jpg");
 }
 .winterportrait .t5 {
-  background-image: url("../images/puzzle/winterportrait_5.jpg");
+  background-image: url("../images/winterportrait_5.jpg");
 }
 .winterportrait .t6 {
-  background-image: url("../images/puzzle/winterportrait_6.jpg");
+  background-image: url("../images/winterportrait_6.jpg");
 }
 .winterportrait .t7 {
-  background-image: url("../images/puzzle/winterportrait_7.jpg");
+  background-image: url("../images/winterportrait_7.jpg");
 }
 .winterportrait .t8 {
-  background-image: url("../images/puzzle/winterportrait_8.jpg");
+  background-image: url("../images/winterportrait_8.jpg");
 }
 .winterportrait .t9 { /* This class should only be used for the 4x4 table */
-  background-image: url("../images/puzzle/winterportrait_9.jpg");
+  background-image: url("../images/winterportrait_9.jpg");
 }
 .winterportrait .t10 {
-  background-image: url("../images/puzzle/winterportrait_10.jpg");
+  background-image: url("../images/winterportrait_10.jpg");
 }
 .winterportrait .t11 {
-  background-image: url("../images/puzzle/winterportrait_11.jpg");
+  background-image: url("../images/winterportrait_11.jpg");
 }
 .winterportrait .t12 {
-  background-image: url("../images/puzzle/winterportrait_12.jpg");
+  background-image: url("../images/winterportrait_12.jpg");
 }
 .winterportrait .t13 {
-  background-image: url("../images/puzzle/winterportrait_13.jpg");
+  background-image: url("../images/winterportrait_13.jpg");
 }
 .winterportrait .t14 {
-  background-image: url("../images/puzzle/winterportrait_14.jpg");
+  background-image: url("../images/winterportrait_14.jpg");
 }
 .winterportrait .t15 {
-  background-image: url("../images/puzzle/winterportrait_15.jpg");
+  background-image: url("../images/winterportrait_15.jpg");
 }
 .winterportrait .blank {
   opacity: 0.2;
-  background-image: url("../images/puzzle/winterportrait_16.jpg");
+  background-image: url("../images/winterportrait_16.jpg");
 }
 .winterportrait .t16 {
-  background-image: url("../images/puzzle/winterportrait_16.jpg");
+  background-image: url("../images/winterportrait_16.jpg");
 }
 /* Background images for 4x4 Saku-chan puzzle */
 .saku-puzzle .t1 {
