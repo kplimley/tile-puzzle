@@ -1,3 +1,4 @@
+//@ts-check
 'use strict'
 
 /*
@@ -9,12 +10,12 @@
 */
 
 const puzzleTable = document.getElementById('puzzle');
-const elScrambleLevel = document.getElementById('scramble-level');
+// const elScrambleLevel = document.getElementById('scramble-level'); => moved to scramble function
 const elMsg = document.getElementById('msg');
 const moveCounter = document.querySelector('#moves');
 const numCorrectOutput = document.querySelector('#num-correct');
 const playAgainButton = document.getElementById('play-again');
-const radioButtons = document.querySelectorAll('input[name="difficulty"]');
+// const radioButtons = document.querySelectorAll('input[name="difficulty"]'); => moved to scrambleLevel function
 const elTimeElapsed = document.getElementById('time-elapsed');
 const showTimeButton = document.querySelector('#time-widget button');
 
@@ -153,7 +154,9 @@ let lastSquare;
 let movable = []; // array
 let puzzleSize, scrambleLevel, moveCount, numCorrect; // integers
 let startTime, endTime; // floating point (times in milliseconds)
+let difficulty;
 
+// Sept 2022 comment: I'm not sure I like having the puzzle size in something called puzzleClass. It's misleading, for one thing.
 let puzzleClass = document.getElementById('puzzle').className;
 if (puzzleClass === 'size-three') {
   puzzleSize = 3;
@@ -210,6 +213,11 @@ if (puzzleClass === 'size-three') {
   console.error('Unable to get the puzzle table class');
 }
 
+// The following two lines I moved here from the isComplete() function.
+let totalTiles = Object.keys(square);
+totalTiles.pop(); // throw away last tile, which should be blank
+console.log(`totalTiles: ${totalTiles}`);
+
 function checkMovable() {
   // console.log(`checkMovable() has been called \n puzzleSize is ${puzzleSize} \n emptySquare is ${emptySquare.name}`);
   if (puzzleSize === 3) {
@@ -252,11 +260,26 @@ function checkMovable() {
   }
 } // end checkMovable() function
 
-function isComplete() { // checks if puzzle is complete, but also counts correct tiles
-  numCorrect = 0;
+function isComplete() { // checks if puzzle is complete, and calls separate function to count correct tiles
+  console.log('isComplete function called');
+  // numCorrect = 0; => moved to inside countCorrectTiles() function
   let success = false;
-  let totalTiles = Object.keys(square);
-  totalTiles.pop(); // throw away last tile, which should be blank
+
+  numCorrect = countCorrectTiles(); // call separate function, assign integer answer to numCorrect
+  console.log(`numCorrect: ${numCorrect}`);
+
+  if ( numCorrect === totalTiles.length ) {
+    success = true;
+  } else if (numCorrect > totalTiles.length ) {
+    throw 'Error: numCorrect exeeds the number of tiles!';
+  }
+  console.log(`success = ${success}`);
+  return success; // return either false or true;
+} // end of isComplete() function
+
+function countCorrectTiles() {
+  console.log('countCorrectTiles() function called');
+  numCorrect = 0;
   for (let i = 1; i <= totalTiles.length; i++) {
     // console.log(`The number we want is ${i}!`);
 
@@ -273,14 +296,8 @@ function isComplete() { // checks if puzzle is complete, but also counts correct
       continue;
     } // end check
   } // end loop
-
-  if ( numCorrect === totalTiles.length ) {
-    success = true;
-  } else if (numCorrect > totalTiles.length ) {
-    throw 'Error: numCorrect exeeds the number of tiles!';
-  }
-  return success; // return either false or true;
-} // end of isComplete() function
+  return numCorrect;
+}
 
 function puzzleEvent(e) {
   // console.log('puzzleEvent(e) has been called');
@@ -313,7 +330,7 @@ function puzzleEvent(e) {
       moveCounter.textContent = moveCount;
       endTime = (Date.now() - startTime) / 1000;
       // endTime = endTime / 1000;
-      elTimeElapsed.innerText = endTime;
+      elTimeElapsed.innerText = endTime.toString();
       if ( isComplete() && moveCount > 0 ) {
         puzzleTable.removeEventListener('click', puzzleEvent);
         if (puzzleSize === 3) {
@@ -343,21 +360,20 @@ function getRandomIntInclusive(min, max) {
 }
 
 function scramble(scrambleLevel) {
+  console.log(`scramble function called with scrambleLevel of ${scrambleLevel}`);
+  const elScrambleLevel = document.getElementById('scramble-level');
   elScrambleLevel.textContent = scrambleLevel;
-  // puzzleTable.animate({
-  //   opacity: [ 1, 0.2 ] // [ from, to ]
-  // }, 1000);
   let minWrongTiles;
-  if (difficulty === 'hard') {
+  if (difficulty === 'easy') {
     minWrongTiles = 9;
   } else {
     minWrongTiles = 12;
   }
-  do {
+  console.log(`minWrongTiles: ${minWrongTiles}`);
+  // do {
     for (let j = 1; j <= scrambleLevel; j++) {
       checkMovable();
       let r = getRandomIntInclusive(0,movable.length-1);
-      // console.log(`Move ${j}: r is ${r}`);
       console.log(`Move ${j}: tile to randomly move is ${movable[r].name}`);
       let tileToMove = movable[r].currentTile;   // tileToMove is a property of tile object
       emptySquare.currentTile = tileToMove; 
@@ -366,14 +382,12 @@ function scramble(scrambleLevel) {
       emptySquare.currentTile = tile.blank;
       emptySquare.updateImage();
     }
-    isComplete(); // counts correct tiles
-    numCorrectOutput.textContent = numCorrect;
-  } while (numCorrect > minWrongTiles);
-
-  // puzzleTable.animate({
-  //   opacity: [ 0.2, 1 ] // [ from, to ]
-  // }, 2000);
-}
+    countCorrectTiles(); // counts correct tiles
+    
+  // } while (numCorrect > minWrongTiles);
+  numCorrectOutput.textContent = numCorrect;
+  console.log(`End of scramble function`);
+} // end scramble function
 
 function showWinningText(moveCount) {
   if (moveCount < 4) {
@@ -393,19 +407,21 @@ function showWinningText(moveCount) {
 }
 
 function initialize(scrambleLevel) {
+  console.log(`initialize function called with scrambleLevel of ${scrambleLevel}`);
   if (puzzleSize === 3) {
     lastSquare = square.s9.element;
   } else if (puzzleSize === 4) {
     lastSquare = square.s16.element;
   }
+  console.log(`puzzleSize: ${puzzleSize}`);
   lastSquare.className = 'blank';
   elMsg.innerHTML = '';
   moveCount = 0;
   endTime = 0;
-  moveCounter.textContent = moveCount;
+  moveCounter.textContent = moveCount.toString();
   elTimeElapsed.innerText = '';
   puzzleTable.addEventListener('click', puzzleEvent, false);
-  let difficulty;
+  const radioButtons = document.querySelectorAll('input[name="difficulty"]');
   for (const radioButton of radioButtons) {
       if (radioButton.checked) {
           difficulty = radioButton.value;
@@ -419,7 +435,7 @@ function initialize(scrambleLevel) {
 }
 
 scrambleLevel = 10;
-initialize(scrambleLevel);
+initialize(scrambleLevel); // Change: only call this function when a button is clicked.
 
 // Square 8's tile:
 // square.s8.currentTile    => this is initially tile.t8
