@@ -14,14 +14,30 @@ const puzzleTable = document.getElementById('puzzle');
 const elMsg = document.getElementById('msg');
 const moveCounter = document.querySelector('#moves');
 const numCorrectOutput = document.querySelector('#num-correct');
+const playButton = document.getElementById('play-btn');
 const playAgainButton = document.getElementById('play-again');
 // const radioButtons = document.querySelectorAll('input[name="difficulty"]'); => moved to scrambleLevel function
 const elTimeElapsed = document.getElementById('time-elapsed');
 const showTimeButton = document.querySelector('#time-widget button');
 
+// only scramble puzzle when button is pressed
+playButton?.addEventListener('click', () => {
+  let scrambleLevelString = window.prompt('What level of scrambling do you want? (enter a number between 1 and 9', '1');
+  if (!scrambleLevelString) {
+    console.error('user canceled');
+  } else {
+    scrambleLevel = parseInt(scrambleLevelString);
+    console.log(`scrambleLevelString converted to integer: ${scrambleLevel}`);
+    scrambleLevel *= 10; // multiply number entered by 10
+    console.log(`scrambleLevel: ${scrambleLevel}`);
+    initialize(scrambleLevel);
+  }
+  
+}, false);
+
 showTimeButton.addEventListener('click', () => {
   let elT = document.getElementById('time-widget').lastChild;
-  if (elT.className === 'hidden') {
+  if (elT && elT.className === 'hidden') {
     elT.className = '';
   } else {
     elT.className = 'hidden';
@@ -343,6 +359,8 @@ function puzzleEvent(e) {
         lastSquare.animate({
           opacity: [ 0.2, 1 ] // [ from, to ]
         }, 2000);
+        playButton.textContent = 'Play again!';
+        console.log('Game End (Win)');
         showWinningText(moveCount);
       }
       numCorrectOutput.textContent = numCorrect;
@@ -418,8 +436,9 @@ function initialize(scrambleLevel) {
   elMsg.innerHTML = '';
   moveCount = 0;
   endTime = 0;
-  moveCounter.textContent = moveCount.toString();
-  elTimeElapsed.innerText = '';
+  if (moveCounter) { moveCounter.textContent = moveCount.toString(); }
+  if (elTimeElapsed) { elTimeElapsed.innerText = ''; }
+  
   puzzleTable.addEventListener('click', puzzleEvent, false);
   const radioButtons = document.querySelectorAll('input[name="difficulty"]');
   for (const radioButton of radioButtons) {
@@ -429,13 +448,16 @@ function initialize(scrambleLevel) {
       }
   }
   scramble(scrambleLevel);
+
+  // I should remove the play again button altogether, and delete the following two lines.
   playAgainButton.className = 'hidden';
   playAgainButton.removeEventListener('click', initialize);
+  
   startTime = Date.now();
 }
 
-scrambleLevel = 10;
-initialize(scrambleLevel); // Change: only call this function when a button is clicked.
+// scrambleLevel = 10;
+// initialize(scrambleLevel); // Change: only call this function when a button is clicked.
 
 // Square 8's tile:
 // square.s8.currentTile    => this is initially tile.t8
