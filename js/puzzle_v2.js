@@ -401,14 +401,14 @@ function scramble(scrambleLevel) {
   if (elScrambleLevel) {
     elScrambleLevel.textContent = scrambleLevel;
   }
-  let minWrongTiles;
+  let maxCorrectTiles;
   if (difficulty === 'easy') {
-    minWrongTiles = 9;
+    maxCorrectTiles = 12; // higher ceiling on easy
   } else {
-    minWrongTiles = 12;
+    maxCorrectTiles = 9; // lower ceiling on hard
   }
-  console.log(`minWrongTiles: ${minWrongTiles}`);
-  // do {
+  console.log(`maxCorrectTiles: ${maxCorrectTiles}`);
+  do {
     for (let j = 1; j <= scrambleLevel; j++) {
       checkMovable();
       let r = getRandomIntInclusive(0,movable.length-1);
@@ -422,7 +422,7 @@ function scramble(scrambleLevel) {
     }
     countCorrectTiles(); // counts correct tiles
     
-  // } while (numCorrect > minWrongTiles);
+  } while (numCorrect > maxCorrectTiles); // repeat if there are too many tiles in the correct place
   if (numCorrectOutput) {
     numCorrectOutput.textContent = numCorrect;
   }
