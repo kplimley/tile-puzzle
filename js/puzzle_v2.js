@@ -481,7 +481,7 @@ function initialize(scrambleLevel) {
             break;
         }
     }
-    scramble(scrambleLevel);
+    scramble(scrambleLevel); // this variable is passed as an argument to the initialize function, and then passed unchanged to the scramble function. Is this really necessary?
 
     // I should remove the play again button altogether, and delete the following 4 lines.
     if (playAgainButton) {
