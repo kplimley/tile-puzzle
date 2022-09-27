@@ -35,14 +35,20 @@ playButton?.addEventListener('click', () => {
   
 }, false);
 
-showTimeButton.addEventListener('click', () => {
-  let elT = document.getElementById('time-widget').lastChild;
-  if (elT && elT.className === 'hidden') {
-    elT.className = '';
-  } else {
-    elT.className = 'hidden';
-  }
-}, false);
+if (showTimeButton) {
+  showTimeButton.addEventListener('click', () => {
+    let timeWidget = document.getElementById('time-widget');
+    if (timeWidget) {
+      let elArray = timeWidget.children;
+      let elT = elArray[length-1];
+      if (elT && elT.className === 'hidden') {
+      elT.className = '';
+      } else {
+      elT.className = 'hidden';
+      }
+    }
+    }, false); // end event listener
+}
 
 // Store the images in an object (as an associative array): redTile: “red.jpg”
 const tile = {
@@ -71,55 +77,55 @@ let square = {
     name: 's1',
     currentTile: tile.t1, // references the object representing the tile currently in this space
     element: document.getElementById('s1'),  // the html element corresponding to this square
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s2: {
     name: 's2',
     currentTile: tile.t2, 
     element: document.getElementById('s2'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s3: {
     name: 's3',
     currentTile: tile.t3, 
     element: document.getElementById('s3'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s4: {
     name: 's4',
     currentTile: tile.t4, 
     element: document.getElementById('s4'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s5: {
     name: 's5',
     currentTile: tile.t5, 
     element: document.getElementById('s5'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s6: {
     name: 's6',
     currentTile: tile.t6, 
     element: document.getElementById('s6'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s7: {
     name: 's7',
     currentTile: tile.t7, 
     element: document.getElementById('s7'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s8: {
     name: 's8',
     currentTile: tile.t8, 
     element: document.getElementById('s8'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   },
   s9: {
     name: 's9',
     currentTile: tile.blank, 
     element: document.getElementById('s9'),
-    updateImage() {this.element.className = this.currentTile;}
+    updateImage() { if (this.element) { this.element.className = this.currentTile; } }
   }
   // s10: {
   //   name: 's10',
@@ -173,60 +179,62 @@ let startTime, endTime; // floating point (times in milliseconds)
 let difficulty;
 
 // Sept 2022 comment: I'm not sure I like having the puzzle size in something called puzzleClass. It's misleading, for one thing.
-let puzzleClass = document.getElementById('puzzle').className;
-if (puzzleClass === 'size-three') {
-  puzzleSize = 3;
-  emptySquare = square.s9;
-} else if (puzzleClass === 'size-four') {
-  puzzleSize = 4;
-  square.s9.currentTile = tile.t9 // will not be blank
-  // alert(`tile on square.s9 is ${square.s9.currentTile}`);
-  // Add properties to square object
-  square.s10 = {
-    name: 's10',
-    currentTile: tile.t10, 
-    element: document.getElementById('s10'),
-    updateImage() {this.element.className = this.currentTile;}
+if (puzzleTable) {
+  let puzzleClass = puzzleTable.className;
+  if (puzzleClass === 'size-three') {
+    puzzleSize = 3;
+    emptySquare = square.s9;
+  } else if (puzzleClass === 'size-four') {
+    puzzleSize = 4;
+    square.s9.currentTile = tile.t9 // will not be blank
+    // alert(`tile on square.s9 is ${square.s9.currentTile}`);
+    // Add properties to square object
+    square.s10 = {
+      name: 's10',
+      currentTile: tile.t10, 
+      element: document.getElementById('s10'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    }
+    square.s11 = {
+      name: 's11',
+      currentTile: tile.t11, 
+      element: document.getElementById('s11'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    },
+    square.s12 = {
+      name: 's12',
+      currentTile: tile.t12, 
+      element: document.getElementById('s12'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    },
+    square.s13 = {
+      name: 's13',
+      currentTile: tile.t13, 
+      element: document.getElementById('s13'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    },
+    square.s14 = {
+      name: 's14',
+      currentTile: tile.t14, 
+      element: document.getElementById('s14'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    },
+    square.s15 = {
+      name: 's15',
+      currentTile: tile.t15, 
+      element: document.getElementById('s15'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    },
+    square.s16 = {
+      name: 's16',
+      currentTile: tile.blank,
+      element: document.getElementById('s16'),
+      updateImage() { if (this.element) { this.element.className = this.currentTile; } }
+    }
+    emptySquare = square.s16;
+  } else {
+    console.error('Unable to get the puzzle table class');
   }
-  square.s11 = {
-    name: 's11',
-    currentTile: tile.t11, 
-    element: document.getElementById('s11'),
-    updateImage() {this.element.className = this.currentTile;}
-  },
-  square.s12 = {
-    name: 's12',
-    currentTile: tile.t12, 
-    element: document.getElementById('s12'),
-    updateImage() {this.element.className = this.currentTile;}
-  },
-  square.s13 = {
-    name: 's13',
-    currentTile: tile.t13, 
-    element: document.getElementById('s13'),
-    updateImage() {this.element.className = this.currentTile;}
-  },
-  square.s14 = {
-    name: 's14',
-    currentTile: tile.t14, 
-    element: document.getElementById('s14'),
-    updateImage() {this.element.className = this.currentTile;}
-  },
-  square.s15 = {
-    name: 's15',
-    currentTile: tile.t15, 
-    element: document.getElementById('s15'),
-    updateImage() {this.element.className = this.currentTile;}
-  },
-  square.s16 = {
-    name: 's16',
-    currentTile: tile.blank,
-    element: document.getElementById('s16'),
-    updateImage() {this.element.className = this.currentTile;}
-  }
-  emptySquare = square.s16;
-} else {
-  console.error('Unable to get the puzzle table class');
 }
 
 // The following two lines I moved here from the isComplete() function.
@@ -343,14 +351,20 @@ function puzzleEvent(e) {
 
       // Update move counter
       moveCount++;
-      moveCounter.textContent = moveCount;
+      if (moveCounter) {
+        moveCounter.textContent = moveCount;
+      }
       endTime = (Date.now() - startTime) / 1000;
-      // endTime = endTime / 1000;
-      elTimeElapsed.innerText = endTime.toString();
-      if ( isComplete() && moveCount > 0 ) {
+      if (elTimeElapsed) {
+        elTimeElapsed.innerText = endTime.toString();
+      }
+      if ( isComplete() && moveCount > 0 && puzzleTable) {
         puzzleTable.removeEventListener('click', puzzleEvent);
         if (puzzleSize === 3) {
           lastSquare = square.s9.element;
+          if (lastSquare === null) {
+            throw new Error('lastSquare in 3x3 puzzles is null');
+          }
           lastSquare.className = 't9';
         } else if (puzzleSize === 4) {
           lastSquare = square.s16.element;
@@ -359,11 +373,15 @@ function puzzleEvent(e) {
         lastSquare.animate({
           opacity: [ 0.2, 1 ] // [ from, to ]
         }, 2000);
-        playButton.textContent = 'Play again!';
+        if (playButton) {
+          playButton.textContent = 'Play again!';
+        }
         console.log('Game End (Win)');
         showWinningText(moveCount);
       }
-      numCorrectOutput.textContent = numCorrect;
+      if (numCorrectOutput) {
+        numCorrectOutput.textContent = numCorrect;
+      }
       
     } 
   }
@@ -380,7 +398,9 @@ function getRandomIntInclusive(min, max) {
 function scramble(scrambleLevel) {
   console.log(`scramble function called with scrambleLevel of ${scrambleLevel}`);
   const elScrambleLevel = document.getElementById('scramble-level');
-  elScrambleLevel.textContent = scrambleLevel;
+  if (elScrambleLevel) {
+    elScrambleLevel.textContent = scrambleLevel;
+  }
   let minWrongTiles;
   if (difficulty === 'easy') {
     minWrongTiles = 9;
@@ -403,25 +423,32 @@ function scramble(scrambleLevel) {
     countCorrectTiles(); // counts correct tiles
     
   // } while (numCorrect > minWrongTiles);
-  numCorrectOutput.textContent = numCorrect;
+  if (numCorrectOutput) {
+    numCorrectOutput.textContent = numCorrect;
+  }
   console.log(`End of scramble function`);
 } // end scramble function
 
 function showWinningText(moveCount) {
-  if (moveCount < 4) {
-    elMsg.innerHTML = 'That wasn\'t very challenging, was it!<br><br>How about playing again?';
-    scrambleLevel += 10;
-  } else if (moveCount < 11) {
-    elMsg.innerHTML = 'Pretty good!<br><br>Let&#39;s up the difficulty slightly.';
-    scrambleLevel += 5;
-  } else {
-    elMsg.innerHTML = `You did it! <br> It only took you ${moveCount} moves!`;
-  }
-  playAgainButton.className = '';
-  playAgainButton.addEventListener(
+  if (elMsg) {
+    if (moveCount < 4) {
+      elMsg.innerHTML = 'That wasn\'t very challenging, was it!<br><br>How about playing again?';
+      scrambleLevel += 10;
+    } else if (moveCount < 11) {
+      elMsg.innerHTML = 'Pretty good!<br><br>Let&#39;s up the difficulty slightly.';
+      scrambleLevel += 5;
+    } else {
+      elMsg.innerHTML = `You did it! <br> It only took you ${moveCount} moves!`;
+    }
+  } 
+  if (playAgainButton) {
+    playAgainButton.className = '';
+    playAgainButton.addEventListener(
     'click', 
     () => {initialize(scrambleLevel); }, 
     false);
+  }
+  
 }
 
 function initialize(scrambleLevel) {
@@ -433,27 +460,36 @@ function initialize(scrambleLevel) {
   }
   console.log(`puzzleSize: ${puzzleSize}`);
   lastSquare.className = 'blank';
-  elMsg.innerHTML = '';
+  if (elMsg) {
+    elMsg.innerHTML = '';
+  }
   moveCount = 0;
   endTime = 0;
   if (moveCounter) { moveCounter.textContent = moveCount.toString(); }
   if (elTimeElapsed) { elTimeElapsed.innerText = ''; }
   
-  puzzleTable.addEventListener('click', puzzleEvent, false);
-  const radioButtons = document.querySelectorAll('input[name="difficulty"]');
-  for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-          difficulty = radioButton.value;
-          break;
-      }
-  }
-  scramble(scrambleLevel);
+  if (puzzleTable === null) {
+    throw new Error('puzzleTable element is null');
+  } else {
+    puzzleTable.addEventListener('click', puzzleEvent, false);
+    const radioButtons = document.querySelectorAll('input[name="difficulty"]');
+    for (const radioButton of radioButtons) {
+        // @ts-ignore
+        if (radioButton.checked) {
+            // @ts-ignore
+            difficulty = radioButton.value;
+            break;
+        }
+    }
+    scramble(scrambleLevel);
 
-  // I should remove the play again button altogether, and delete the following two lines.
-  playAgainButton.className = 'hidden';
-  playAgainButton.removeEventListener('click', initialize);
-  
-  startTime = Date.now();
+    // I should remove the play again button altogether, and delete the following 4 lines.
+    if (playAgainButton) {
+      playAgainButton.className = 'hidden';
+      playAgainButton.removeEventListener('click', initialize);  
+    }
+    startTime = Date.now();
+  }
 }
 
 // scrambleLevel = 10;
