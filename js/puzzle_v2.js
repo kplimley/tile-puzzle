@@ -1,13 +1,9 @@
 //@ts-check
 'use strict'
 
-/*
-  Things to work on next:
-  1. Merge javascript into a single file, using a simple if statement if necessary to check for puzzle size (mostly done, but might have bugs)
-  2. Add move counter, to record how many moves you make (done)
-  3. Add check for initial condition (tiles are all on original squares) (done)
-  4. Implement difficult setting that checks the number of correct tiles
-*/
+// Difficulty level constants
+const easyMode = 12;
+const hardMode = 8; // adjusted this down to 8, from 9
 
 const puzzleTable = document.getElementById('puzzle');
 // const elScrambleLevel = document.getElementById('scramble-level'); => moved to scramble function
@@ -35,6 +31,7 @@ playButton?.addEventListener('click', () => {
   }
 }, false);
 
+/* Removing the below Show/Hide Time button feature
 if (showTimeButton) {
   showTimeButton.addEventListener('click', () => {
     let timeWidget = document.getElementById('time-widget');
@@ -48,7 +45,7 @@ if (showTimeButton) {
       }
     }
     }, false); // end event listener
-}
+} */
 
 // Store the images in an object (as an associative array): redTile: “red.jpg”
 const tile = {
@@ -190,7 +187,7 @@ if (puzzleTable) {
   } else if (puzzleClass === 'size-four') {
     puzzleSize = 4;
     square.s9.currentTile = tile.t9 // will not be blank
-    // alert(`tile on square.s9 is ${square.s9.currentTile}`);
+    
     // Add properties to square object
     square.s10 = {
       name: 's10',
@@ -435,9 +432,9 @@ function scramble(scrambleLevel) {
   }
   let maxCorrectTiles;
   if (difficulty === 'easy') {
-    maxCorrectTiles = 12; // higher ceiling on easy
+    maxCorrectTiles = easyMode; // higher ceiling on easy; easyMode const defined at top of file
   } else {
-    maxCorrectTiles = 9; // lower ceiling on hard
+    maxCorrectTiles = hardMode; // lower ceiling on hard; hardMode const defined at top of file
   }
   console.log(`maxCorrectTiles: ${maxCorrectTiles}`);
   do {
