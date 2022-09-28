@@ -360,17 +360,13 @@ function puzzleEvent(e) {
         // moveCounter.firstChild.nodeValue = moveCount;
       }
       endTime = (Date.now() - startTime) / 1000;
+      let t = calcMinSec(endTime); // returns array: [minutes, seconds]
       if (elTimeElapsed) {
-        if (endTime < 60) {
-          console.log(`${endTime} is <= 60`);
-          elTimeElapsed.textContent = endTime.toString() + ' seconds';
+        // elTimeElapsed.textContent = endTime.toString() + ' seconds';
+        if (t[0] === null ) {
+          elTimeElapsed.textContent = t[1] + ' sec';
         } else {
-          console.log(`${endTime} is > 60`);
-          endTime /= 60; // divide by 60 to convert to minutes
-          /* FIX: ideally we want both minutes AND seconds; 
-                  divide by 60 to whole number => min, 
-                  remainder rounded down => seconds */
-          elTimeElapsed.textContent = endTime.toString() + ' minutes';
+          elTimeElapsed.textContent = t[0] + ' min ' + t[1] + ' sec';
         }
       }
       if ( isComplete() && moveCount > 0 && puzzleTable) {
@@ -409,6 +405,30 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
+function calcMinSec(endTime) {
+  let time = [null, endTime];
+  console.group();
+  console.log(`endTime: ${endTime}`);
+  if (endTime < 60) {
+    console.log(`${endTime} is < 60`);
+    time[1] = endTime.toFixed(1); // minutes will be null if less than 60 seconds
+  } else {
+    console.log(`${endTime} is > 60`);
+    console.log(`endTime % 60 = ${endTime%60}`);
+    
+    // Calculate seconds to assign to 2nd element in time array
+    time[1] = (endTime % 60).toFixed();
+    console.log(`(endTime % 60).toFixed() = ${time[1]}`);
+
+    // Calculate minutes to assign to 1st element in time array
+    time[0] = ((endTime - (endTime % 60)) / 60).toFixed();
+    console.log(`endTime - (endTime % 60) = ${endTime - (endTime%60)}`);
+  }
+  console.log(`time array: ${time}`);
+  console.groupEnd();
+  return time;
+}
+
 function scramble(scrambleLevel) {
   console.log(`scramble function called with scrambleLevel of ${scrambleLevel}`);
   const elScrambleLevel = document.getElementById('scramble-level');
@@ -426,7 +446,7 @@ function scramble(scrambleLevel) {
     for (let j = 1; j <= (scrambleLevel * 10); j++) {
       checkMovable();
       let r = getRandomIntInclusive(0,movable.length-1);
-      console.log(`Move ${j}: tile to randomly move is ${movable[r].name}`);
+      // console.log(`Move ${j}: tile to randomly move is ${movable[r].name}`);
       let tileToMove = movable[r].currentTile;   // tileToMove is a property of tile object
       emptySquare.currentTile = tileToMove; 
       emptySquare.updateImage();
