@@ -41,8 +41,10 @@ if (showTimeButton) {
     if (timeWidget) {
       if (timeWidget.className === 'hidden') {
         timeWidget.className = '';
+        showTimeButton.textContent = 'Hide Time';
       } else {
         timeWidget.className = 'hidden';
+        showTimeButton.textContent = 'Show Time';
       }
     }
     }, false); // end event listener
