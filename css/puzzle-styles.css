@@ -35,11 +35,11 @@ main > p {
   font-size: 1.5rem;
 }
 #time-widget {
-  position: absolute;
+  /* position: absolute; */
   display: block;
   width: 12em;
-  bottom: 1em;
-  left: 750px;
+  /* bottom: 1em; */
+  /* left: 750px; */
   font-style: italic;
 }
 #puzzle {

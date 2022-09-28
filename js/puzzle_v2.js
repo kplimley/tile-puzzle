@@ -18,33 +18,33 @@ const playButton = document.getElementById('play-btn');
 const playAgainButton = document.getElementById('play-again');
 // const radioButtons = document.querySelectorAll('input[name="difficulty"]'); => moved to scrambleLevel function
 const elTimeElapsed = document.getElementById('time-elapsed');
-const showTimeButton = document.querySelector('#time-widget button');
+const showTimeButton = document.querySelector('#time-btn');
 
 // only scramble puzzle when button is pressed
 playButton?.addEventListener('click', () => {
-  let scrambleLevelString = window.prompt('What level of scrambling do you want? (enter a number between 1 and 9', '1');
+  let scrambleLevelString = window.prompt(`What level of scrambling do you want? (enter a number between ${minScrambleLevel} and 9)`, `${minScrambleLevel}`);
   if (!scrambleLevelString) {
-    console.error('user canceled');
+    console.log('user canceled');
   } else {
     scrambleLevel = parseInt(scrambleLevelString);
     console.log(`scrambleLevelString converted to integer: ${scrambleLevel}`);
-    scrambleLevel *= 10; // multiply number entered by 10
-    console.log(`scrambleLevel: ${scrambleLevel}`);
+    if (scrambleLevel < minScrambleLevel) {
+      scrambleLevel = minScrambleLevel;
+    }
     initialize(scrambleLevel);
   }
-  
 }, false);
 
 if (showTimeButton) {
   showTimeButton.addEventListener('click', () => {
     let timeWidget = document.getElementById('time-widget');
     if (timeWidget) {
-      let elArray = timeWidget.children;
-      let elT = elArray[length-1];
-      if (elT && elT.className === 'hidden') {
-      elT.className = '';
+      if (timeWidget.className === 'hidden') {
+        timeWidget.className = '';
+        showTimeButton.textContent = 'Hide Time';
       } else {
-      elT.className = 'hidden';
+        timeWidget.className = 'hidden';
+        showTimeButton.textContent = 'Show Time';
       }
     }
     }, false); // end event listener
@@ -174,9 +174,12 @@ let square = {
 let emptySquare = {}; // initialize to empty object; will depend on puzzleSize
 let lastSquare;
 let movable = []; // array
-let puzzleSize, scrambleLevel, moveCount, numCorrect; // integers
+let puzzleSize, numCorrect; // integers
+let minScrambleLevel = 1;   // integer
+let scrambleLevel = 1;      // integer
+let moveCount = 0;          // integer
 let startTime, endTime; // floating point (times in milliseconds)
-let difficulty;
+let difficulty;         // string
 
 // Sept 2022 comment: I'm not sure I like having the puzzle size in something called puzzleClass. It's misleading, for one thing.
 if (puzzleTable) {
@@ -302,7 +305,7 @@ function isComplete() { // checks if puzzle is complete, and calls separate func
 } // end of isComplete() function
 
 function countCorrectTiles() {
-  console.log('countCorrectTiles() function called');
+  // console.log('countCorrectTiles() function called');
   numCorrect = 0;
   for (let i = 1; i <= totalTiles.length; i++) {
     // console.log(`The number we want is ${i}!`);
@@ -352,7 +355,9 @@ function puzzleEvent(e) {
       // Update move counter
       moveCount++;
       if (moveCounter) {
-        moveCounter.textContent = moveCount;
+        let moveStr = moveCount.toString();
+        moveCounter.textContent = moveStr;
+        // moveCounter.firstChild.nodeValue = moveCount;
       }
       endTime = (Date.now() - startTime) / 1000;
       if (elTimeElapsed) {
@@ -382,7 +387,6 @@ function puzzleEvent(e) {
       if (numCorrectOutput) {
         numCorrectOutput.textContent = numCorrect;
       }
-      
     } 
   }
 
@@ -409,7 +413,7 @@ function scramble(scrambleLevel) {
   }
   console.log(`maxCorrectTiles: ${maxCorrectTiles}`);
   do {
-    for (let j = 1; j <= scrambleLevel; j++) {
+    for (let j = 1; j <= (scrambleLevel * 10); j++) {
       checkMovable();
       let r = getRandomIntInclusive(0,movable.length-1);
       console.log(`Move ${j}: tile to randomly move is ${movable[r].name}`);
@@ -420,9 +424,7 @@ function scramble(scrambleLevel) {
       emptySquare.currentTile = tile.blank;
       emptySquare.updateImage();
     }
-    countCorrectTiles(); // counts correct tiles
-    
-  } while (numCorrect > maxCorrectTiles); // repeat if there are too many tiles in the correct place
+  } while (countCorrectTiles() > maxCorrectTiles); // repeat if too many tiles are in the correct place
   if (numCorrectOutput) {
     numCorrectOutput.textContent = numCorrect;
   }
@@ -431,22 +433,15 @@ function scramble(scrambleLevel) {
 
 function showWinningText(moveCount) {
   if (elMsg) {
-    if (moveCount < 4) {
+    if (moveCount < 9) {
       elMsg.innerHTML = 'That wasn\'t very challenging, was it!<br><br>How about playing again?';
-      scrambleLevel += 10;
-    } else if (moveCount < 11) {
+      minScrambleLevel += 2;
+    } else if (moveCount < 13) {
       elMsg.innerHTML = 'Pretty good!<br><br>Let&#39;s up the difficulty slightly.';
-      scrambleLevel += 5;
+      minScrambleLevel += 1;
     } else {
       elMsg.innerHTML = `You did it! <br> It only took you ${moveCount} moves!`;
     }
-  } 
-  if (playAgainButton) {
-    playAgainButton.className = '';
-    playAgainButton.addEventListener(
-    'click', 
-    () => {initialize(scrambleLevel); }, 
-    false);
   }
   
 }
@@ -467,7 +462,7 @@ function initialize(scrambleLevel) {
   endTime = 0;
   if (moveCounter) { moveCounter.textContent = moveCount.toString(); }
   if (elTimeElapsed) { elTimeElapsed.innerText = ''; }
-  
+
   if (puzzleTable === null) {
     throw new Error('puzzleTable element is null');
   } else {
