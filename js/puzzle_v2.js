@@ -361,7 +361,17 @@ function puzzleEvent(e) {
       }
       endTime = (Date.now() - startTime) / 1000;
       if (elTimeElapsed) {
-        elTimeElapsed.innerText = endTime.toString();
+        if (endTime < 60) {
+          console.log(`${endTime} is <= 60`);
+          elTimeElapsed.textContent = endTime.toString() + ' seconds';
+        } else {
+          console.log(`${endTime} is > 60`);
+          endTime /= 60; // divide by 60 to convert to minutes
+          /* FIX: ideally we want both minutes AND seconds; 
+                  divide by 60 to whole number => min, 
+                  remainder rounded down => seconds */
+          elTimeElapsed.textContent = endTime.toString() + ' minutes';
+        }
       }
       if ( isComplete() && moveCount > 0 && puzzleTable) {
         puzzleTable.removeEventListener('click', puzzleEvent);
