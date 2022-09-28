@@ -246,15 +246,17 @@ totalTiles.pop(); // throw away last tile, which should be blank
 console.log(`totalTiles: ${totalTiles}`);
 
 function checkMovable() {
-  // console.log(`checkMovable() has been called \n puzzleSize is ${puzzleSize} \n emptySquare is ${emptySquare.name}`);
   if (puzzleSize === 3) {
     switch (emptySquare) {  // This switch statement works for 3x3 grid
+      // Top row
       case square.s1: {movable = [square.s2, square.s4]; break;}
       case square.s2: {movable = [square.s1, square.s3, square.s5]; break;}
       case square.s3: {movable = [square.s2, square.s6]; break;}
+      // Second row
       case square.s4: {movable = [square.s1, square.s5, square.s7]; break;}
       case square.s5: {movable = [square.s2, square.s4, square.s6, square.s8]; break;}
       case square.s6: {movable = [square.s3, square.s5, square.s9]; break;}
+      // Third row
       case square.s7: {movable = [square.s4, square.s8]; break;}
       case square.s8: {movable = [square.s5, square.s7, square.s9]; break;}
       case square.s9: {movable = [square.s6, square.s8]; break;}
@@ -287,18 +289,16 @@ function checkMovable() {
   }
 } // end checkMovable() function
 
-function isComplete() { // checks if puzzle is complete, and calls separate function to count correct tiles
-  console.log('isComplete function called');
-  // numCorrect = 0; => moved to inside countCorrectTiles() function
+function isComplete() { // checks if puzzle is complete
+  // console.log('isComplete function called');
   let success = false;
-
   numCorrect = countCorrectTiles(); // call separate function, assign integer answer to numCorrect
   console.log(`numCorrect: ${numCorrect}`);
 
   if ( numCorrect === totalTiles.length ) {
     success = true;
   } else if (numCorrect > totalTiles.length ) {
-    throw 'Error: numCorrect exeeds the number of tiles!';
+    throw new Error('Error: numCorrect exeeds the number of tiles!');
   }
   console.log(`success = ${success}`);
   return success; // return either false or true;
@@ -308,7 +308,6 @@ function countCorrectTiles() {
   // console.log('countCorrectTiles() function called');
   numCorrect = 0;
   for (let i = 1; i <= totalTiles.length; i++) {
-    // console.log(`The number we want is ${i}!`);
 
     // get the current tile of this square (the actual object, not name or number)
     let thisSquare = 's' + i;
@@ -316,7 +315,7 @@ function countCorrectTiles() {
 
     // What is the number of the correct tile for this square?
     let correctTile = 't' + i;
-    // console.log(`The correct tile would be ${correctTile}`);
+    
     if ( thisTile === correctTile ) {
       // console.log('This tile is in the correct place!');
       numCorrect++;
@@ -327,7 +326,6 @@ function countCorrectTiles() {
 }
 
 function puzzleEvent(e) {
-  // console.log('puzzleEvent(e) has been called');
   let target = e.target;
   console.log(`click target is ${target.className}`);
   checkMovable();
@@ -345,8 +343,7 @@ function puzzleEvent(e) {
       emptySquare.updateImage();
       
       // The clicked square will be the empty one next
-      emptySquare = movable[i];        
-      // alert(`${emptySquare.name} will be the next empty square!`); 
+      emptySquare = movable[i];
 
       // This clicked square's property (e.g., square.s8) has already been set to emptySquare, so update emptySquare's tile
       emptySquare.currentTile = tile.blank;
@@ -357,8 +354,8 @@ function puzzleEvent(e) {
       if (moveCounter) {
         let moveStr = moveCount.toString();
         moveCounter.textContent = moveStr;
-        // moveCounter.firstChild.nodeValue = moveCount;
       }
+      // Calculate and display elapsed time in minutes and seconds
       endTime = (Date.now() - startTime) / 1000;
       let t = calcMinSec(endTime); // returns array: [minutes, seconds]
       if (elTimeElapsed) {
@@ -384,6 +381,7 @@ function puzzleEvent(e) {
         lastSquare.animate({
           opacity: [ 0.2, 1 ] // [ from, to ]
         }, 2000);
+        numCorrect++ // Add the last tile (#16 in a 4x4 puzzle) to the number correct
         if (playButton) {
           playButton.textContent = 'Play again!';
         }
