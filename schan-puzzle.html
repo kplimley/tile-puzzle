@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Scrambled Tile Puzzle</title>
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
   <link rel="stylesheet" href="css/puzzle-styles.css">
 </head>
 <body>
   <main>
     <h1>Scrambled Tiles Puzzle</h1>
     <div id="info-box">
-      <p>バージョン: 2.1</p>
+      <p>バージョン: 2.2</p>
       <p>ごちゃまぜレベル: <span id="scramble-level"></span></p>
       <p>うごかしたかいすう: <span id="moves"></span></p>
-      <p>ばしょがあっているかず: <span id="num-correct"></span></p><br>
+      <p>ばしょがあっているかず: <span id="num-correct"></span></p>
+      <p>Your time: <span id="time-elapsed"></span></p>
       <p id="msg"></p>
-      <p><br><button id="play-again" class="hidden">もういっかいやる</button></p>
-      <p><a href="puzzle2022_v2.1.html">3 x 3 パズル</a></p>
-      <p><a href="puzzle2022-4x4.html">けいしパズル</a></p>
+      <p><a href="puzzle2022_v2.1.html">「しばふの上の赤ちゃん」パズル（3x3）</a></p>
+      <p><a href="index.html">「犬ぼうしの男子」パズル</a></p>
     </div>
     <div id="difficulty">
       <input type="radio" name="difficulty" value="easy" id="difficulty-easy" checked="checked">
@@ -24,6 +25,7 @@
       <input type="radio" name="difficulty" value="hard" id="difficulty-hard">
       <label for="difficulty-hard">Hard</label>
     </div>
+    <button type="button" id="play-btn">Play!</button>
     <div class="saku-puzzle">
     <table id="puzzle" class="size-four" width="600" height="600">
       <tbody>
@@ -54,10 +56,9 @@
       </tbody>
     </table>
     </div>
-    <div id="time-widget">
-      <p><button>じかんを見る</button></p>
-      <p class="hidden">かかったじかん: <span id="time-elapsed"></span> びょう</p></div>
   </main>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script src="js/puzzle_v2.js"></script>
 </body>
 </html>

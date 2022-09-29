@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Scrambled Tile Puzzle</title>
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
   <link rel="stylesheet" href="css/puzzle-styles.css">
 </head>
 <body>
@@ -13,8 +14,6 @@
       <p>Scramble level: <span id="scramble-level"></span></p>
       <p>Move count: <span id="moves"></span></p>
       <p>Number correct: <span id="num-correct"></span></p>
-      
-      <!-- move time display here, remove hidden class, etc. -->
       <p>Your time: <span id="time-elapsed"></span></p>
 
       <p id="msg"></p>
@@ -60,11 +59,9 @@
       </tbody>
     </table>
     </div>
-    <div id="time-widget">
-      
-      
-    </div>
   </main>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script src="js/puzzle_v2.js"></script>
 </body>
 </html>
